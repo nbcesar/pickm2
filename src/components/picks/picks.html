@@ -1,0 +1,91 @@
+<div class="no-pick" *ngIf="currentUserPicks?.length == 0">
+  <ion-row justify-content-center class="logo-row">
+    <ion-col col-12 text-center>
+      <img class="logo" src="../assets/images/pickm-logo.png">
+    </ion-col>
+  </ion-row>
+  <ion-row justify-content-center>
+    <ion-col col-12 text-center>
+      <h1>Welcome to Pick'm Football</h1>
+      <p>Increase your chances by buying multiple picks.</p>
+      <h3>Winner take all.</h3>
+      <p>minus 10% for admin</p>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-12 text-center>
+      <button ion-button large color="dark" (click)="buyPicks(1)">Buy 1 Pick: $25</button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-12 text-center>
+      <button ion-button large color="primary" (click)="buyPicks(2)">Buy 2 Picks: $50</button>
+    </ion-col>
+  </ion-row>
+</div>
+
+<div (swipe)="tapEvent($event)" *ngIf="currentUserPicks?.length > 0">
+
+  <ion-toolbar color="light" >
+    <ion-title>Week {{ viewWeek }}</ion-title>  
+    <ion-select  *ngIf="currentUserPicks.length > 1" color="dark" [(ngModel)]="pickNumber" (ionChange)="pickChange($event)">
+      <ion-option *ngFor="let pick of currentUserPicks; let i = index;" [value]="i">Pick {{ i + 1 }}</ion-option>
+    </ion-select>
+  </ion-toolbar>
+    
+  <ion-row justify-content-center>
+    <ion-col col-4 col-md-2 class="arrow">
+        <ion-icon *ngIf="viewWeek > 1" ios="md-arrow-back" md="md-arrow-back" (click)="changeView('back')"></ion-icon>      
+    </ion-col>
+    <ion-col col-4 col-md-2 class="myPick">
+      <div *ngIf="currentUserPicks.length > 0">
+        <h1 *ngIf="!currentUserPicks[pickNumber].gameWeeks[gameWeek].team">{{ viewWeek }}</h1>
+        <div class="logo"  *ngIf="currentUserPicks[pickNumber].gameWeeks[gameWeek].team">
+          <img src="./assets/images/{{currentUserPicks[pickNumber].gameWeeks[gameWeek].team}}.jpg">
+        </div>
+      </div>
+    </ion-col>
+    <ion-col col-4 col-md-2 class="arrow" >
+        <ion-icon *ngIf="viewWeek < 17" ios="md-arrow-forward" md="md-arrow-forward" (click)="changeView('forward')"></ion-icon>      
+    </ion-col>
+  </ion-row>
+
+  <ion-row justify-content-center>
+    <ion-col col-12 text-center *ngIf="!currentUserPicks[pickNumber].gameWeeks[gameWeek].team"><p class="instructions">Pick your team below.</p></ion-col>
+    <ion-col col-12 col-md-5 *ngFor="let game of schedule[viewWeek - 1]">
+      <ion-card>
+        <ion-card-header>
+          {{ game?.gameDateTime | date:'EEEE, MMM d  @ h:mm a'}}
+        </ion-card-header>
+        <ion-card-content>
+          <ion-row class="game-details">
+            <ion-col col-5 class="team-details" (click)="pickTeam(game.awayTeam,game)">
+              <img [class.locked]="currentUserPicks[pickNumber].teams[game.awayTeam]" src="./assets/images/{{game?.awayTeam}}.jpg">
+              <div *ngIf="teams">
+                <h2 >{{ teams[game.awayTeam].city }}</h2>
+                <h3>{{ teams[game.awayTeam].mascot }}</h3>
+                <h6>{{ teams[game.awayTeam].wins }} - {{ teams[game.awayTeam].losses }}
+                  <span *ngIf="teams[game.awayTeam].ties > 0"> - {{ teams[game.awayTeam].ties }}</span>
+                </h6>
+              </div>
+            </ion-col>
+            <ion-col col-1 class="at">
+              <h1>@</h1>
+            </ion-col>
+            <ion-col col-5 class="team-details" (click)="pickTeam(game.homeTeam,game)">
+                <img [class.locked]="currentUserPicks[pickNumber].teams[game.homeTeam]" src="./assets/images/{{game?.homeTeam}}.jpg">
+              <div *ngIf="teams">
+                <h2 >{{ teams[game.homeTeam].city }}</h2>
+                <h3>{{ teams[game.homeTeam].mascot }}</h3>
+                <h6>{{ teams[game.homeTeam].wins }} - {{ teams[game.homeTeam].losses }}
+                  <span *ngIf="teams[game.homeTeam].ties > 0"> - {{ teams[game.homeTeam].ties }}</span>
+                </h6>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row> 
+
+</div>

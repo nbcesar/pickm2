@@ -1,0 +1,10 @@
+<ion-toolbar color="light">
+  <ion-title>{{ usersAlive }} Players | {{ pot }} </ion-title>
+</ion-toolbar>
+<div *ngFor="let pick of currentUserPicks">
+  <league-user [pick]="pick" isCurrentUser="true"></league-user>
+</div>
+<hr />
+<div *ngFor="let pick of users">
+  <league-user [pick]="pick" isCurrentUser="false"></league-user>
+</div>

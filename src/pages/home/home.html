@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title *ngIf="!mobile">Pick'm Football</ion-title>
+    <ion-segment *ngIf="mobile" [(ngModel)]="page" color="light">
+      <ion-segment-button value="picks">
+        Picks
+      </ion-segment-button>
+      <ion-segment-button value="league">
+        League
+      </ion-segment-button>
+    </ion-segment>
+    <ion-buttons end>
+      <button ion-button icon-only color="light" (click)="goToSettings()">
+          <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="desktop" *ngIf="!mobile">
+    <div class="league-desktop">
+      <league></league>
+    </div>
+    <div class="picks-desktop">
+      <picks></picks>
+    </div>
+  </div>
+  
+  <div *ngIf="mobile" [ngSwitch]="page" class="mobile">
+    <league *ngSwitchCase="'league'"></league>
+    <picks *ngSwitchCase="'picks'"></picks>
+  </div>
+    
+  
+</ion-content>

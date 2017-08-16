@@ -1,0 +1,54 @@
+league-user {
+
+    .card-content {
+        padding: 5px;
+    }
+    .game-container {
+        display: flex;
+        flex-wrap: wrap;
+        //justify-content: center;
+        
+    }
+    .gameWeek {
+        height: 45px;
+        width: 45px;
+        //float: left;
+        margin-right: 2px;
+        //border: 3px solid black;
+        border-radius: 5px;
+        background-color: #DCDCDC;
+        //min-height: 50px;
+        margin-bottom: 1px;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        .logo {
+            position: relative;
+            top: 0;
+            left: 0;
+            border-radius: 5px;
+        }
+        h1 {
+            font-size: 3.5rem;
+            margin:0 !important;
+            
+        }
+        .dead {
+            position: absolute;
+            opacity: .5;
+            top: 0;
+            left: 0;
+        }
+        .dead-week {
+            opacity: 1;
+            position: absolute;
+            bottom: -2px;
+            left: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            color: #fff;
+        }
+    }
+}

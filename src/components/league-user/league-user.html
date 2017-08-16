@@ -1,0 +1,397 @@
+<!-- Generated template for the LeagueUserComponent component -->
+<ion-card>
+  <ion-card-content>
+    <!-- <ion-row>
+      <ion-col col-12>
+         <h2>{{ pick?.userName  }} <span *ngIf="pick?.pickNumber > 1"> Pick #{{ pick?.pickNumber }}</span></h2> 
+      </ion-col>
+      <ion-col col-2 class="gameWeek" *ngIf="currentWeek >= 1 || isCurrentUser=='true'">
+        <div *ngIf="pick?.gameWeeks.gameWeek1.locked || isCurrentUser=='true'">
+          <h1 *ngIf="!pick?.gameWeeks.gameWeek1.team">1</h1>
+          <img class="logo" *ngIf="pick.gameWeeks.gameWeek1?.team" src="./assets/images/{{pick.gameWeeks.gameWeek1?.team}}.jpg">
+          <img class="dead" *ngIf="!pick.gameWeeks.gameWeek1.alive && pick.gameWeeks.gameWeek1?.team" src="./assets/images/dead.png">
+          <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek1?.team">1</h4>
+        </div>
+        <div *ngIf="!pick?.gameWeeks.gameWeek1.locked && isCurrentUser=='false'">
+          <h1>1</h1>
+        </div>
+      </ion-col>
+      <ion-col col-2 class="gameWeek" *ngIf="currentWeek >= 1 || isCurrentUser=='true'">
+        <div *ngIf="pick?.gameWeeks.gameWeek2.locked || isCurrentUser=='true'">
+          <h1 *ngIf="!pick?.gameWeeks.gameWeek2.team">2</h1>
+          <img class="logo" *ngIf="pick.gameWeeks.gameWeek2?.team" src="./assets/images/{{pick.gameWeeks.gameWeek2?.team}}.jpg">
+          <img class="dead" *ngIf="!pick.gameWeeks.gameWeek2.alive && pick.gameWeeks.gameWeek2?.team" src="./assets/images/dead.png">
+          <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek2?.team">2</h4>
+        </div>
+        <div *ngIf="!pick?.gameWeeks.gameWeek2.locked && isCurrentUser=='false'">
+          <h1>2</h1>
+        </div>
+      </ion-col>
+      <ion-col col-2 class="gameWeek" *ngIf="currentWeek >= 1 || isCurrentUser=='true'">
+        <div *ngIf="pick?.gameWeeks.gameWeek3.locked || isCurrentUser=='true'">
+          <h1 *ngIf="!pick?.gameWeeks.gameWeek3.team">3</h1>
+          <img class="logo" *ngIf="pick.gameWeeks.gameWeek3?.team" src="./assets/images/{{pick.gameWeeks.gameWeek3?.team}}.jpg">
+          <img class="dead" *ngIf="!pick.gameWeeks.gameWeek3.alive && pick.gameWeeks.gameWeek3?.team" src="./assets/images/dead.png">
+          <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek3?.team">3</h4>
+        </div>
+        <div *ngIf="!pick?.gameWeeks.gameWeek3.locked && isCurrentUser=='false'">
+          <h1>3</h1>
+        </div>
+      </ion-col>
+      <ion-col col-2 class="gameWeek" *ngIf="currentWeek >= 1 || isCurrentUser=='true'">
+        <div *ngIf="pick?.gameWeeks.gameWeek4.locked || isCurrentUser=='true'">
+          <h1 *ngIf="!pick?.gameWeeks.gameWeek4.team">4</h1>
+          <img class="logo" *ngIf="pick.gameWeeks.gameWeek4?.team" src="./assets/images/{{pick.gameWeeks.gameWeek4?.team}}.jpg">
+          <img class="dead" *ngIf="!pick.gameWeeks.gameWeek4.alive && pick.gameWeeks.gameWeek4?.team" src="./assets/images/dead.png">
+          <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek4?.team">4</h4>
+        </div>
+        <div *ngIf="!pick?.gameWeeks.gameWeek4.locked && isCurrentUser=='false'">
+          <h1>4</h1>
+        </div>
+      </ion-col>
+      <ion-col col-2 class="gameWeek" *ngIf="currentWeek >= 1 || isCurrentUser=='true'">
+        <div *ngIf="pick?.gameWeeks.gameWeek5.locked || isCurrentUser=='true'">
+          <h1 *ngIf="!pick?.gameWeeks.gameWeek5.team">5</h1>
+          <img class="logo" *ngIf="pick.gameWeeks.gameWeek5?.team" src="./assets/images/{{pick.gameWeeks.gameWeek5?.team}}.jpg">
+          <img class="dead" *ngIf="!pick.gameWeeks.gameWeek5.alive && pick.gameWeeks.gameWeek5?.team" src="./assets/images/dead.png">
+          <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek5?.team">5</h4>
+        </div>
+        <div *ngIf="!pick?.gameWeeks.gameWeek5.locked && isCurrentUser=='false'">
+          <h1>5</h1>
+        </div>
+      </ion-col>
+      <ion-col col-2 class="gameWeek" *ngIf="currentWeek >= 1 || isCurrentUser=='true'">
+        <div *ngIf="pick?.gameWeeks.gameWeek6.locked || isCurrentUser=='true'">
+          <h1 *ngIf="!pick?.gameWeeks.gameWeek6.team">6</h1>
+          <img class="logo" *ngIf="pick.gameWeeks.gameWeek6?.team" src="./assets/images/{{pick.gameWeeks.gameWeek6?.team}}.jpg">
+          <img class="dead" *ngIf="!pick.gameWeeks.gameWeek6.alive && pick.gameWeeks.gameWeek6?.team" src="./assets/images/dead.png">
+          <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek6?.team">6</h4>
+        </div>
+        <div *ngIf="!pick?.gameWeeks.gameWeek6.locked && isCurrentUser=='false'">
+          <h1>6</h1>
+        </div>
+      </ion-col>
+      <ion-col col-2 class="gameWeek" *ngIf="currentWeek >= 7 || isCurrentUser=='true'">
+        <div *ngIf="pick?.gameWeeks.gameWeek7.locked || isCurrentUser=='true'">
+          <h1 *ngIf="!pick?.gameWeeks.gameWeek7.team">7</h1>
+          <img class="logo" *ngIf="pick.gameWeeks.gameWeek7?.team" src="./assets/images/{{pick.gameWeeks.gameWeek7?.team}}.jpg">
+          <img class="dead" *ngIf="!pick.gameWeeks.gameWeek7.alive && pick.gameWeeks.gameWeek7?.team" src="./assets/images/dead.png">
+          <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek7?.team">7</h4>
+        </div>
+        <div *ngIf="!pick?.gameWeeks.gameWeek7.locked && isCurrentUser=='false'">
+          <h1>7</h1>
+        </div>
+      </ion-col>
+      <ion-col col-2 class="gameWeek" *ngIf="currentWeek >= 7 || isCurrentUser=='true'">
+        <div *ngIf="pick?.gameWeeks.gameWeek8.locked || isCurrentUser=='true'">
+          <h1 *ngIf="!pick?.gameWeeks.gameWeek8.team">8</h1>
+          <img class="logo" *ngIf="pick.gameWeeks.gameWeek8?.team" src="./assets/images/{{pick.gameWeeks.gameWeek8?.team}}.jpg">
+          <img class="dead" *ngIf="!pick.gameWeeks.gameWeek8.alive && pick.gameWeeks.gameWeek8?.team" src="./assets/images/dead.png">
+          <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek8?.team">8</h4>
+        </div>
+        <div *ngIf="!pick?.gameWeeks.gameWeek8.locked && isCurrentUser=='false'">
+          <h1>8</h1>
+        </div>
+      </ion-col>
+      <ion-col col-2 class="gameWeek" *ngIf="currentWeek >= 7 || isCurrentUser=='true'">
+        <div *ngIf="pick?.gameWeeks.gameWeek9.locked || isCurrentUser=='true'">
+          <h1 *ngIf="!pick?.gameWeeks.gameWeek9.team">9</h1>
+          <img class="logo" *ngIf="pick.gameWeeks.gameWeek9?.team" src="./assets/images/{{pick.gameWeeks.gameWeek9?.team}}.jpg">
+          <img class="dead" *ngIf="!pick.gameWeeks.gameWeek9.alive && pick.gameWeeks.gameWeek9?.team" src="./assets/images/dead.png">
+          <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek9?.team">9</h4>
+        </div>
+        <div *ngIf="!pick?.gameWeeks.gameWeek9.locked && isCurrentUser=='false'">
+          <h1>9</h1>
+        </div>
+      </ion-col>
+      <ion-col col-2 class="gameWeek" *ngIf="currentWeek >= 7 || isCurrentUser=='true'">
+        <div *ngIf="pick?.gameWeeks.gameWeek10.locked || isCurrentUser=='true'">
+          <h1 *ngIf="!pick?.gameWeeks.gameWeek10.team">10</h1>
+          <img class="logo" *ngIf="pick.gameWeeks.gameWeek10?.team" src="./assets/images/{{pick.gameWeeks.gameWeek10?.team}}.jpg">
+          <img class="dead" *ngIf="!pick.gameWeeks.gameWeek10.alive && pick.gameWeeks.gameWeek10?.team" src="./assets/images/dead.png">
+          <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek10?.team">10</h4>
+        </div>
+        <div *ngIf="!pick?.gameWeeks.gameWeek10.locked && isCurrentUser=='false'">
+          <h1>10</h1>
+        </div>
+      </ion-col>
+      <ion-col col-2 class="gameWeek" *ngIf="currentWeek >= 7 || isCurrentUser=='true'">
+        <div *ngIf="pick?.gameWeeks.gameWeek11.locked || isCurrentUser=='true'">
+          <h1 *ngIf="!pick?.gameWeeks.gameWeek11.team">11</h1>
+          <img class="logo" *ngIf="pick.gameWeeks.gameWeek11?.team" src="./assets/images/{{pick.gameWeeks.gameWeek11?.team}}.jpg">
+          <img class="dead" *ngIf="!pick.gameWeeks.gameWeek11.alive && pick.gameWeeks.gameWeek11?.team" src="./assets/images/dead.png">
+          <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek11?.team">11</h4>
+        </div>
+        <div *ngIf="!pick?.gameWeeks.gameWeek11.locked && isCurrentUser=='false'">
+          <h1>11</h1>
+        </div>
+      </ion-col>
+      <ion-col col-2 class="gameWeek" *ngIf="currentWeek >= 7 || isCurrentUser=='true'">
+        <div *ngIf="pick?.gameWeeks.gameWeek12.locked || isCurrentUser=='true'">
+          <h1 *ngIf="!pick?.gameWeeks.gameWeek12.team">12</h1>
+          <img class="logo" *ngIf="pick.gameWeeks.gameWeek12?.team" src="./assets/images/{{pick.gameWeeks.gameWeek12?.team}}.jpg">
+          <img class="dead" *ngIf="!pick.gameWeeks.gameWeek12.alive && pick.gameWeeks.gameWeek12?.team" src="./assets/images/dead.png">
+          <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek12?.team">12</h4>
+        </div>
+        <div *ngIf="!pick?.gameWeeks.gameWeek12.locked && isCurrentUser=='false'">
+          <h1>12</h1>
+        </div>
+      </ion-col>
+      <ion-col col-2 class="gameWeek" *ngIf="currentWeek >= 13 || isCurrentUser=='true'">
+        <div *ngIf="pick?.gameWeeks.gameWeek13.locked || isCurrentUser=='true'">
+          <h1 *ngIf="!pick?.gameWeeks.gameWeek13.team">13</h1>
+          <img class="logo" *ngIf="pick.gameWeeks.gameWeek13?.team" src="./assets/images/{{pick.gameWeeks.gameWeek13?.team}}.jpg">
+          <img class="dead" *ngIf="!pick.gameWeeks.gameWeek13.alive && pick.gameWeeks.gameWeek13?.team" src="./assets/images/dead.png">
+          <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek13?.team">13</h4>
+        </div>
+        <div *ngIf="!pick?.gameWeeks.gameWeek13.locked && isCurrentUser=='false'">
+          <h1>13</h1>
+        </div>
+      </ion-col>
+      <ion-col col-2 class="gameWeek" *ngIf="currentWeek >= 13 || isCurrentUser=='true'">
+        <div *ngIf="pick?.gameWeeks.gameWeek14.locked || isCurrentUser=='true'">
+          <h1 *ngIf="!pick?.gameWeeks.gameWeek14.team">14</h1>
+          <img class="logo" *ngIf="pick.gameWeeks.gameWeek14?.team" src="./assets/images/{{pick.gameWeeks.gameWeek14?.team}}.jpg">
+          <img class="dead" *ngIf="!pick.gameWeeks.gameWeek14.alive && pick.gameWeeks.gameWeek14?.team" src="./assets/images/dead.png">
+          <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek14?.team">14</h4>
+        </div>
+        <div *ngIf="!pick?.gameWeeks.gameWeek14.locked && isCurrentUser=='false'">
+          <h1>14</h1>
+        </div>
+      </ion-col>
+      <ion-col col-2 class="gameWeek" *ngIf="currentWeek >= 13 || isCurrentUser=='true'">
+        <div *ngIf="pick?.gameWeeks.gameWeek15.locked || isCurrentUser=='true'">
+          <h1 *ngIf="!pick?.gameWeeks.gameWeek15.team">15</h1>
+          <img class="logo" *ngIf="pick.gameWeeks.gameWeek15?.team" src="./assets/images/{{pick.gameWeeks.gameWeek15?.team}}.jpg">
+          <img class="dead" *ngIf="!pick.gameWeeks.gameWeek15.alive && pick.gameWeeks.gameWeek15?.team" src="./assets/images/dead.png">
+          <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek15?.team">15</h4>
+        </div>
+        <div *ngIf="!pick?.gameWeeks.gameWeek15.locked && isCurrentUser=='false'">
+          <h1>15</h1>
+        </div>
+      </ion-col>
+      <ion-col col-2 class="gameWeek" *ngIf="currentWeek >= 13 || isCurrentUser=='true'">
+        <div *ngIf="pick?.gameWeeks.gameWeek16.locked || isCurrentUser=='true'">
+          <h1 *ngIf="!pick?.gameWeeks.gameWeek16.team">16</h1>
+          <img class="logo" *ngIf="pick.gameWeeks.gameWeek16?.team" src="./assets/images/{{pick.gameWeeks.gameWeek16?.team}}.jpg">
+          <img class="dead" *ngIf="!pick.gameWeeks.gameWeek16.alive && pick.gameWeeks.gameWeek16?.team" src="./assets/images/dead.png">
+          <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek16?.team">16</h4>
+        </div>
+        <div *ngIf="!pick?.gameWeeks.gameWeek16.locked && isCurrentUser=='false'">
+          <h1>16</h1>
+        </div>
+      </ion-col>
+      <ion-col col-2 class="gameWeek" *ngIf="currentWeek >= 13 || isCurrentUser=='true'">
+        <div *ngIf="pick?.gameWeeks.gameWeek17.locked || isCurrentUser=='true'">
+          <h1 *ngIf="!pick?.gameWeeks.gameWeek17.team">17</h1>
+          <img class="logo" *ngIf="pick.gameWeeks.gameWeek17?.team" src="./assets/images/{{pick.gameWeeks.gameWeek17?.team}}.jpg">
+          <img class="dead" *ngIf="!pick.gameWeeks.gameWeek17.alive && pick.gameWeeks.gameWeek17?.team" src="./assets/images/dead.png">
+          <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek17?.team">17</h4>
+        </div>
+        <div *ngIf="!pick?.gameWeeks.gameWeek17.locked && isCurrentUser=='false'">
+          <h1>17</h1>
+        </div>
+      </ion-col>
+    </ion-row> -->
+
+
+    <ion-row>
+        <ion-col col-12>
+           <h2>{{ pick?.userName  }} <span *ngIf="pick?.pickNumber > 1"> Pick #{{ pick?.pickNumber }}</span></h2> 
+        </ion-col>
+      </ion-row>
+      <div class="game-container">
+        <div class="gameWeek" *ngIf="currentWeek >= 1 || isCurrentUser=='true'">
+          <div *ngIf="pick?.gameWeeks.gameWeek1.locked || isCurrentUser=='true'">
+            <h1 *ngIf="!pick?.gameWeeks.gameWeek1.team">1</h1>
+            <img class="logo" *ngIf="pick.gameWeeks.gameWeek1?.team" src="./assets/images/{{pick.gameWeeks.gameWeek1?.team}}.jpg">
+            <img class="dead" *ngIf="!pick.gameWeeks.gameWeek1.alive && pick.gameWeeks.gameWeek1?.team" src="./assets/images/dead.png">
+            <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek1?.team">1</h4>
+          </div>
+          <div *ngIf="!pick?.gameWeeks.gameWeek1.locked && isCurrentUser=='false'">
+            <h1>1</h1>
+          </div>
+        </div>
+        <div class="gameWeek" *ngIf="currentWeek >= 2 || isCurrentUser=='true'">
+          <div *ngIf="pick?.gameWeeks.gameWeek2.locked || isCurrentUser=='true'">
+            <h1 *ngIf="!pick?.gameWeeks.gameWeek2.team">2</h1>
+            <img class="logo" *ngIf="pick.gameWeeks.gameWeek2?.team" src="./assets/images/{{pick.gameWeeks.gameWeek2?.team}}.jpg">
+            <img class="dead" *ngIf="!pick.gameWeeks.gameWeek2.alive && pick.gameWeeks.gameWeek2?.team" src="./assets/images/dead.png">
+            <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek2?.team">2</h4>
+          </div>
+          <div *ngIf="!pick?.gameWeeks.gameWeek2.locked && isCurrentUser=='false'">
+            <h1>2</h1>
+          </div>
+        </div>
+        <div class="gameWeek" *ngIf="currentWeek >= 3 || isCurrentUser=='true'">
+          <div *ngIf="pick?.gameWeeks.gameWeek3.locked || isCurrentUser=='true'">
+            <h1 *ngIf="!pick?.gameWeeks.gameWeek3.team">3</h1>
+            <img class="logo" *ngIf="pick.gameWeeks.gameWeek3?.team" src="./assets/images/{{pick.gameWeeks.gameWeek3?.team}}.jpg">
+            <img class="dead" *ngIf="!pick.gameWeeks.gameWeek3.alive && pick.gameWeeks.gameWeek3?.team" src="./assets/images/dead.png">
+            <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek3?.team">3</h4>
+          </div>
+          <div *ngIf="!pick?.gameWeeks.gameWeek3.locked && isCurrentUser=='false'">
+            <h1>3</h1>
+          </div>
+        </div>
+        <div class="gameWeek" *ngIf="currentWeek >= 4 || isCurrentUser=='true'">
+          <div *ngIf="pick?.gameWeeks.gameWeek4.locked || isCurrentUser=='true'">
+            <h1 *ngIf="!pick?.gameWeeks.gameWeek4.team">4</h1>
+            <img class="logo" *ngIf="pick.gameWeeks.gameWeek4?.team" src="./assets/images/{{pick.gameWeeks.gameWeek4?.team}}.jpg">
+            <img class="dead" *ngIf="!pick.gameWeeks.gameWeek4.alive && pick.gameWeeks.gameWeek4?.team" src="./assets/images/dead.png">
+            <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek4?.team">4</h4>
+          </div>
+          <div *ngIf="!pick?.gameWeeks.gameWeek4.locked && isCurrentUser=='false'">
+            <h1>4</h1>
+          </div>
+        </div>
+        <div class="gameWeek" *ngIf="currentWeek >= 5 || isCurrentUser=='true'">
+          <div *ngIf="pick?.gameWeeks.gameWeek5.locked || isCurrentUser=='true'">
+            <h1 *ngIf="!pick?.gameWeeks.gameWeek5.team">5</h1>
+            <img class="logo" *ngIf="pick.gameWeeks.gameWeek5?.team" src="./assets/images/{{pick.gameWeeks.gameWeek5?.team}}.jpg">
+            <img class="dead" *ngIf="!pick.gameWeeks.gameWeek5.alive && pick.gameWeeks.gameWeek5?.team" src="./assets/images/dead.png">
+            <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek5?.team">5</h4>
+          </div>
+          <div *ngIf="!pick?.gameWeeks.gameWeek5.locked && isCurrentUser=='false'">
+            <h1>5</h1>
+          </div>
+        </div>
+        <div class="gameWeek" *ngIf="currentWeek >= 6 || isCurrentUser=='true'">
+          <div *ngIf="pick?.gameWeeks.gameWeek6.locked || isCurrentUser=='true'">
+            <h1 *ngIf="!pick?.gameWeeks.gameWeek6.team">6</h1>
+            <img class="logo" *ngIf="pick.gameWeeks.gameWeek6?.team" src="./assets/images/{{pick.gameWeeks.gameWeek6?.team}}.jpg">
+            <img class="dead" *ngIf="!pick.gameWeeks.gameWeek6.alive && pick.gameWeeks.gameWeek6?.team" src="./assets/images/dead.png">
+            <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek6?.team">6</h4>
+          </div>
+          <div *ngIf="!pick?.gameWeeks.gameWeek6.locked && isCurrentUser=='false'">
+            <h1>6</h1>
+          </div>
+        </div>
+        <div class="gameWeek" *ngIf="currentWeek >= 7 || isCurrentUser=='true'">
+          <div *ngIf="pick?.gameWeeks.gameWeek7.locked || isCurrentUser=='true'">
+            <h1 *ngIf="!pick?.gameWeeks.gameWeek7.team">7</h1>
+            <img class="logo" *ngIf="pick.gameWeeks.gameWeek7?.team" src="./assets/images/{{pick.gameWeeks.gameWeek7?.team}}.jpg">
+            <img class="dead" *ngIf="!pick.gameWeeks.gameWeek7.alive && pick.gameWeeks.gameWeek7?.team" src="./assets/images/dead.png">
+            <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek7?.team">7</h4>
+          </div>
+          <div *ngIf="!pick?.gameWeeks.gameWeek7.locked && isCurrentUser=='false'">
+            <h1>7</h1>
+          </div>
+        </div>
+        <div class="gameWeek" *ngIf="currentWeek >= 8 || isCurrentUser=='true'">
+          <div *ngIf="pick?.gameWeeks.gameWeek8.locked || isCurrentUser=='true'">
+            <h1 *ngIf="!pick?.gameWeeks.gameWeek8.team">8</h1>
+            <img class="logo" *ngIf="pick.gameWeeks.gameWeek8?.team" src="./assets/images/{{pick.gameWeeks.gameWeek8?.team}}.jpg">
+            <img class="dead" *ngIf="!pick.gameWeeks.gameWeek8.alive && pick.gameWeeks.gameWeek8?.team" src="./assets/images/dead.png">
+            <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek8?.team">8</h4>
+          </div>
+          <div *ngIf="!pick?.gameWeeks.gameWeek8.locked && isCurrentUser=='false'">
+            <h1>8</h1>
+          </div>
+        </div>
+        <div class="gameWeek" *ngIf="currentWeek >= 9 || isCurrentUser=='true'">
+          <div *ngIf="pick?.gameWeeks.gameWeek9.locked || isCurrentUser=='true'">
+            <h1 *ngIf="!pick?.gameWeeks.gameWeek9.team">9</h1>
+            <img class="logo" *ngIf="pick.gameWeeks.gameWeek9?.team" src="./assets/images/{{pick.gameWeeks.gameWeek9?.team}}.jpg">
+            <img class="dead" *ngIf="!pick.gameWeeks.gameWeek9.alive && pick.gameWeeks.gameWeek9?.team" src="./assets/images/dead.png">
+            <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek9?.team">9</h4>
+          </div>
+          <div *ngIf="!pick?.gameWeeks.gameWeek9.locked && isCurrentUser=='false'">
+            <h1>9</h1>
+          </div>
+        </div>
+        <div class="gameWeek" *ngIf="currentWeek >= 10 || isCurrentUser=='true'">
+          <div *ngIf="pick?.gameWeeks.gameWeek10.locked || isCurrentUser=='true'">
+            <h1 *ngIf="!pick?.gameWeeks.gameWeek10.team">10</h1>
+            <img class="logo" *ngIf="pick.gameWeeks.gameWeek10?.team" src="./assets/images/{{pick.gameWeeks.gameWeek10?.team}}.jpg">
+            <img class="dead" *ngIf="!pick.gameWeeks.gameWeek10.alive && pick.gameWeeks.gameWeek10?.team" src="./assets/images/dead.png">
+            <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek10?.team">10</h4>
+          </div>
+          <div *ngIf="!pick?.gameWeeks.gameWeek10.locked && isCurrentUser=='false'">
+            <h1>10</h1>
+          </div>
+        </div>
+        <div class="gameWeek" *ngIf="currentWeek >= 11 || isCurrentUser=='true'">
+          <div *ngIf="pick?.gameWeeks.gameWeek11.locked || isCurrentUser=='true'">
+            <h1 *ngIf="!pick?.gameWeeks.gameWeek11.team">11</h1>
+            <img class="logo" *ngIf="pick.gameWeeks.gameWeek11?.team" src="./assets/images/{{pick.gameWeeks.gameWeek11?.team}}.jpg">
+            <img class="dead" *ngIf="!pick.gameWeeks.gameWeek11.alive && pick.gameWeeks.gameWeek11?.team" src="./assets/images/dead.png">
+            <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek11?.team">11</h4>
+          </div>
+          <div *ngIf="!pick?.gameWeeks.gameWeek11.locked && isCurrentUser=='false'">
+            <h1>11</h1>
+          </div>
+        </div>
+        <div class="gameWeek" *ngIf="currentWeek >= 12 || isCurrentUser=='true'">
+          <div *ngIf="pick?.gameWeeks.gameWeek12.locked || isCurrentUser=='true'">
+            <h1 *ngIf="!pick?.gameWeeks.gameWeek12.team">12</h1>
+            <img class="logo" *ngIf="pick.gameWeeks.gameWeek12?.team" src="./assets/images/{{pick.gameWeeks.gameWeek12?.team}}.jpg">
+            <img class="dead" *ngIf="!pick.gameWeeks.gameWeek12.alive && pick.gameWeeks.gameWeek12?.team" src="./assets/images/dead.png">
+            <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek12?.team">12</h4>
+          </div>
+          <div *ngIf="!pick?.gameWeeks.gameWeek12.locked && isCurrentUser=='false'">
+            <h1>12</h1>
+          </div>
+        </div>
+        <div class="gameWeek" *ngIf="currentWeek >= 13 || isCurrentUser=='true'">
+          <div *ngIf="pick?.gameWeeks.gameWeek13.locked || isCurrentUser=='true'">
+            <h1 *ngIf="!pick?.gameWeeks.gameWeek13.team">13</h1>
+            <img class="logo" *ngIf="pick.gameWeeks.gameWeek13?.team" src="./assets/images/{{pick.gameWeeks.gameWeek13?.team}}.jpg">
+            <img class="dead" *ngIf="!pick.gameWeeks.gameWeek13.alive && pick.gameWeeks.gameWeek13?.team" src="./assets/images/dead.png">
+            <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek13?.team">13</h4>
+          </div>
+          <div *ngIf="!pick?.gameWeeks.gameWeek13.locked && isCurrentUser=='false'">
+            <h1>13</h1>
+          </div>
+        </div>
+        <div class="gameWeek" *ngIf="currentWeek >= 14 || isCurrentUser=='true'">
+          <div *ngIf="pick?.gameWeeks.gameWeek14.locked || isCurrentUser=='true'">
+            <h1 *ngIf="!pick?.gameWeeks.gameWeek14.team">14</h1>
+            <img class="logo" *ngIf="pick.gameWeeks.gameWeek14?.team" src="./assets/images/{{pick.gameWeeks.gameWeek14?.team}}.jpg">
+            <img class="dead" *ngIf="!pick.gameWeeks.gameWeek14.alive && pick.gameWeeks.gameWeek14?.team" src="./assets/images/dead.png">
+            <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek14?.team">14</h4>
+          </div>
+          <div *ngIf="!pick?.gameWeeks.gameWeek14.locked && isCurrentUser=='false'">
+            <h1>14</h1>
+          </div>
+        </div>
+        <div class="gameWeek" *ngIf="currentWeek >= 15 || isCurrentUser=='true'">
+          <div *ngIf="pick?.gameWeeks.gameWeek15.locked || isCurrentUser=='true'">
+            <h1 *ngIf="!pick?.gameWeeks.gameWeek15.team">15</h1>
+            <img class="logo" *ngIf="pick.gameWeeks.gameWeek15?.team" src="./assets/images/{{pick.gameWeeks.gameWeek15?.team}}.jpg">
+            <img class="dead" *ngIf="!pick.gameWeeks.gameWeek15.alive && pick.gameWeeks.gameWeek15?.team" src="./assets/images/dead.png">
+            <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek15?.team">15</h4>
+          </div>
+          <div *ngIf="!pick?.gameWeeks.gameWeek15.locked && isCurrentUser=='false'">
+            <h1>15</h1>
+          </div>
+        </div>
+        <div class="gameWeek" *ngIf="currentWeek >= 16 || isCurrentUser=='true'">
+          <div *ngIf="pick?.gameWeeks.gameWeek16.locked || isCurrentUser=='true'">
+            <h1 *ngIf="!pick?.gameWeeks.gameWeek16.team">16</h1>
+            <img class="logo" *ngIf="pick.gameWeeks.gameWeek16?.team" src="./assets/images/{{pick.gameWeeks.gameWeek16?.team}}.jpg">
+            <img class="dead" *ngIf="!pick.gameWeeks.gameWeek16.alive && pick.gameWeeks.gameWeek16?.team" src="./assets/images/dead.png">
+            <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek16?.team">16</h4>
+          </div>
+          <div *ngIf="!pick?.gameWeeks.gameWeek16.locked && isCurrentUser=='false'">
+            <h1>16</h1>
+          </div>
+        </div>
+        <div class="gameWeek" *ngIf="currentWeek >= 17 || isCurrentUser=='true'">
+          <div *ngIf="pick?.gameWeeks.gameWeek17.locked || isCurrentUser=='true'">
+            <h1 *ngIf="!pick?.gameWeeks.gameWeek17.team">17</h1>
+            <img class="logo" *ngIf="pick.gameWeeks.gameWeek17?.team" src="./assets/images/{{pick.gameWeeks.gameWeek17?.team}}.jpg">
+            <img class="dead" *ngIf="!pick.gameWeeks.gameWeek17.alive && pick.gameWeeks.gameWeek17?.team" src="./assets/images/dead.png">
+            <h4 class="dead-week" *ngIf="pick.gameWeeks.gameWeek17?.team">17</h4>
+          </div>
+          <div *ngIf="!pick?.gameWeeks.gameWeek17.locked && isCurrentUser=='false'">
+            <h1>17</h1>
+          </div>
+        </div>
+        
+      </div>
+      
+  </ion-card-content>
+  
+  
+</ion-card>

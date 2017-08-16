@@ -1,0 +1,123 @@
+<ion-header *ngIf="!mobile">
+  <ion-toolbar color="dark">
+    <ion-title>Pick'm Football</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <ion-grid>
+
+    <ion-row justify-content-center class="logo-row">
+      <ion-col col-10 >
+        <img class="logo" src="../assets/images/pickm-logo.png">
+      </ion-col>
+    </ion-row>
+    
+    <ion-row justify-content-center>
+      <ion-col col-12 col-md-5 class="info-card description-list" [class.mobile]="mobile" padding> 
+        
+          <ion-row class="description-row" [class.mobile]="mobile">
+            <ion-col col-3 col-md-2>
+              <img class="icon" src="../assets/images/icon.png">
+            </ion-col>
+            <ion-col col-8 col-md-10 >
+              <p>Pick the winner of a game each week.</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="description-row" [class.mobile]="mobile">
+            <ion-col col-3 col-md-2>
+              <img class="icon" src="../assets/images/icon.png">
+            </ion-col>
+            <ion-col col-8 col-md-10 >
+              <p>You can only select that team once.</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="!mobile" class="description-row" [class.mobile]="mobile">
+            <ion-col col-3 col-md-2>
+              <img class="icon" src="../assets/images/icon.png">
+            </ion-col>
+            <ion-col col-8 col-md-10 >
+              <p>Last person standing wins.</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="description-row" [class.mobile]="mobile">
+            <ion-col col-3 col-md-2>
+              <img class="icon" src="../assets/images/icon.png">
+            </ion-col>
+            <ion-col col-8 col-md-10 >
+              <p>$25 per pick. <strong>WINNER TAKE ALL!</strong></p>
+            </ion-col>
+          </ion-row>
+        
+      </ion-col>
+      
+      <ion-col col-1></ion-col>
+      
+      <ion-col col-12 col-md-5 class="info-card sign-up" padding>
+        <button ion-button color="light" full (click)="scrollDown()">Get Started</button>
+         
+        <div padding>
+          <ion-segment color="dark" [(ngModel)]="action">
+            <ion-segment-button value="signup">
+              Create Account
+            </ion-segment-button>
+            <ion-segment-button value="login">
+              Sign In
+            </ion-segment-button>
+          </ion-segment>
+        </div> 
+        
+        <div [ngSwitch]="action">
+
+          
+            <ion-list *ngSwitchCase="'signup'">
+              <form [formGroup]="signupForm" (ngSubmit)="signup()">
+                <ion-item>
+                  <ion-label floating>Email</ion-label>
+                  <ion-input type="email" formControlName="email"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label floating>Username</ion-label>
+                  <ion-input type="text" formControlName="username"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label floating>Password</ion-label>
+                  <ion-input type="password" formControlName="password"></ion-input>
+                </ion-item>
+
+                <button ion-button color="dark" full [disabled]="!signupForm.valid">Submit</button>
+              </form>
+            </ion-list>
+          
+          
+        
+          <ion-list *ngSwitchCase="'login'">
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+              <ion-item>
+                <ion-label floating>Email</ion-label>
+                <ion-input type="email" formControlName="email"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label floating>Password</ion-label>
+                <ion-input type="password" formControlName="password"></ion-input>
+              </ion-item>
+
+              <button ion-button color="dark" full [disabled]="!loginForm.valid">Submit</button>
+            </form>
+          </ion-list>
+          
+        </div>
+
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+  
+</ion-content>

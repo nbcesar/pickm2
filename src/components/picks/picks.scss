@@ -1,0 +1,97 @@
+picks {
+    overflow: scroll;
+    height: calc(100% - 56px);
+    .toolbar-content {
+        display: flex;
+    }
+    .select-text {
+        color: #000000;
+    }
+    .myPick {
+        //background-color: #fff;
+         min-height: 125px;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+
+        h1 {
+            font-size: 5rem;
+            font-weight: bold;
+            margin: 0 !important;
+            //border: 2px solid black;
+        }
+        .logo {
+            img {
+                border-radius: 10px;
+            }
+        }
+    }
+    .arrow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        ion-icon {
+            font-size: 5rem;
+        }
+    }
+    ion-card-header {
+        font-size: 2rem !important;
+        text-align: center;
+        font-weight: bold;
+    }
+    .game-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .team-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            img {
+                border-radius: 10px;
+            }
+            h2 {
+                font-size: 1.75rem;
+                margin: 0;
+            }
+            h3 {
+                font-size: 1.5rem;
+                margin: 0;
+            }
+            p {
+                font-size: 1.5em;
+                font-weight: bold;
+            }
+        }
+    }
+    .at {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        h1 {
+            font-weight: bold;
+            font-size: 3rem;
+        }
+    }
+    .locked {
+        opacity: .25;
+    }
+    .no-pick {
+        height: calc(100% - 56px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        p {
+            margin-top: 5px;
+        }
+    }
+    .instructions {
+        margin: 2px;
+        //font-weight: bold;
+        font-size: 1.75rem;
+    }
+}
