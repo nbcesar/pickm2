@@ -12,10 +12,22 @@ import { HomePage } from '../pages/home/home';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any;
+  rootPage:any = LandingPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public loadingCtrl: LoadingController) {
+  constructor(
+    platform: Platform, 
+    statusBar: StatusBar, 
+    splashScreen: SplashScreen, 
+    public loadingCtrl: LoadingController,
+  ) {
     
+    // let loading = this.loadingCtrl.create({
+    //   content: 'Loading...',
+    //   dismissOnPageChange: true,
+    // });
+
+    // loading.present();
+
     firebase.initializeApp({
       apiKey: "AIzaSyAiquWTntv-tFERuUPdpVhfDUrVNliHFDQ",
       authDomain: "mrcesarapp.firebaseapp.com",
@@ -32,20 +44,26 @@ export class MyApp {
       splashScreen.hide();
     });
 
+    
     firebase.auth().onAuthStateChanged(user => {
       if (user) {        
         let loading = this.loadingCtrl.create({
-          content: 'Loading...',
+          content: 'Logging you in...',
           showBackdrop: false,
           duration: 2500
         });
         loading.present();
-        this.rootPage = HomePage;
+        setTimeout(()=> {
+          this.rootPage = HomePage;
+        }, 1000);
+        
       }
       else {
         this.rootPage = LandingPage;
       }
     });
+  
+    
   }
 }
 

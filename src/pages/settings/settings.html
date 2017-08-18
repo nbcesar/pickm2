@@ -3,8 +3,9 @@
     <ion-title>Settings</ion-title>
     
     <ion-buttons end>
-      <button *ngIf="admin" ion-button color="light" (click)="goToResults()">
-        Results
+      <button *ngIf="admin" ion-button icon-only color="light" (click)="goToResults()">
+        <!-- Results -->
+        <ion-icon name="american-football"></ion-icon>
       </button>
       <button ion-button color="light" (click)="logOut()">
           Logout
@@ -33,6 +34,7 @@
       <ion-list text-wrap>
         <ion-item><p>Each person picks 1 team to win each week during the regular season.</p></ion-item>
         <ion-item><p>If your team wins, you move on to the next week.</p></ion-item>
+        <ion-item><p>If your team ties, you lose.</p></ion-item>
         <ion-item><p>But you <strong>can't</strong> pick the same team twice.</p></ion-item>
         <ion-item><p>The last person standing wins. If more than one person is alive at the end of the season or if all remaining players lose during the same week, the pot is split between them.</p></ion-item>
         <ion-item><p>The house take 10% for administrative fees<p></ion-item>

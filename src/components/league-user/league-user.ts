@@ -19,7 +19,7 @@ export class LeagueUserComponent {
   }
 
   ngOnInit() {
-    this.currentWeek = this.userService.currentWeek;
+    this.currentWeek = this.userService.currentWeek.value;
   }
 
   // TODO: Implement a click that goes to the pick page for the correct pick & week.

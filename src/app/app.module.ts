@@ -9,6 +9,7 @@ import { MyApp } from './app.component';
 import { LandingPage } from '../pages/landing/landing';
 import { HomePage } from '../pages/home/home';
 import { SettingsPage } from '../pages/settings/settings';
+import { ResultsPage } from '../pages/results/results';
 
 import { LeagueComponent } from '../components/league/league';
 import { LeagueUserComponent } from '../components/league-user/league-user';
@@ -24,7 +25,8 @@ import { UserProvider } from '../providers/user/user';
     LeagueComponent,
     LeagueUserComponent,
     PicksComponent,
-    SettingsPage
+    SettingsPage,
+    ResultsPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { UserProvider } from '../providers/user/user';
     LeagueComponent,
     LeagueUserComponent,
     PicksComponent,
-    SettingsPage
+    SettingsPage,
+    ResultsPage
   ],
   providers: [
     StatusBar,

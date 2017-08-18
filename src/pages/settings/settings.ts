@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { ResultsPage } from '../results/results';
 
 import { UserProvider } from '../../providers/user/user';
  
@@ -22,7 +23,6 @@ export class SettingsPage {
 
   ionViewDidLoad() {
     this.currentUserEmail = this.userService.currentEmail;
-    console.log(this.currentUserEmail);
     if (this.currentUserEmail == 'nbcesar+pickm@gmail.com') this.admin = true;
   }
 
@@ -52,6 +52,10 @@ export class SettingsPage {
     });
     confirm.present();
     
+  }
+
+  goToResults() {
+    this.navCtrl.push(ResultsPage); 
   }
 
 }

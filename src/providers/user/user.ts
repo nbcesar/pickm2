@@ -1,63 +1,79 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LoadingController, AlertController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import firebase from 'firebase';
 
+import { HomePage } from '../../pages/home/home';
+import { LandingPage } from '../../pages/landing/landing';
+
 @Injectable()
 export class UserProvider {
 
-  currentWeek: number;
   usersRef = firebase.database().ref('/pickm/users');
+  currentWeekRef = firebase.database().ref('/pickm/currentWeek');
+  teamsRef = firebase.database().ref('/pickm/teams');
+  scheduleRef = firebase.database().ref('/pickm/schedule');
 
+  // TODO: Change these to BehaviorSubjects. Need to adjust initial value
   currentUserId: Observable<String>;
   currentEmail: string;
-  usersData: Observable<Object>;
-  scheduleData: Observable<object>;
-  teamsData: Observable<Object>;
+  usersData: BehaviorSubject<Object>;
+  scheduleData: BehaviorSubject<any>;
+  teamsData: BehaviorSubject<Object>;
+  currentWeek: BehaviorSubject<any>;
 
   constructor(
     public http: Http,
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
   ) {
-  
+    console.log('loading user');
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
+        // TODO: Can get rid of this and just return user  from firebase.auth().user
         this.currentUserId = new Observable(observer => {
           observer.next(user.uid);
         });
         this.currentEmail = user.email;
       } 
-        
     });
 
-    this.usersData = new Observable(observer => {
+    this.usersData = new BehaviorSubject(
       this.usersRef.on('value', usersSnapshot => {
-        observer.next(usersSnapshot.val());
-      });
-    });
-
+        this.usersData.next(usersSnapshot.val());
+      })
+    );
+    
     // Get current week
-    firebase.database().ref('/pickm/currentWeek').once('value', currentWeek => {
-      this.currentWeek = currentWeek.val();
-    });    
+    this.currentWeek = new BehaviorSubject(
+      firebase.database().ref('/pickm/currentWeek').once('value', currentWeek => {
+        this.currentWeek.next(currentWeek.val());
+      })
+    );
 
-    // Get schedule
-    this.scheduleData = new Observable(observer => {
+
+    // Get the schedule
+    this.scheduleData = new BehaviorSubject(
       firebase.database().ref('/pickm/schedule').on('value', scheduleSnapshot => {
-        observer.next(scheduleSnapshot.val());
-      });
-    });
+        this.scheduleData.next(scheduleSnapshot.val());
+      })
+    );
 
     // Get teams
-    this.teamsData = new Observable (observer => {
-      firebase.database().ref('/pickm/teams').on('value', teamsSnapshot => {
-        observer.next(teamsSnapshot.val());
-      });
+    // this.teamsData = new BehaviorSubject(
+    //   firebase.database().ref('/pickm/teams').on('value', teamsSnapshot => {
+    //     this.teamsData.next(teamsSnapshot.val());
+    //   })
+    // )
+    this.teamsData = new BehaviorSubject({});
+    firebase.database().ref('/pickm/teams').on('value', teamsSnapshot => {
+      this.teamsData.next(teamsSnapshot.val());
     });
+
   }
 
   addPick(picksToAdd) {
@@ -70,7 +86,6 @@ export class UserProvider {
         pickNumber++;
       }
     });
-    console.log('pick added');
     this.sendAlert('Payment Successful', 'Good luck!');
   }
 
@@ -88,7 +103,6 @@ export class UserProvider {
         loader.dismiss();
       })
       .catch((error)=> {
-        //TODO: Validate signup erros
         loader.dismiss();
         console.log(error);
         if (error['code'] == 'auth/email-already-in-use') this.sendAlert("Something's wrong",'That email is taken.');
@@ -170,7 +184,7 @@ export class UserProvider {
     let headers = new Headers({ 'Content-Type': 'application/json' }); //'Access-Control-Allow-Origin': "*" , 'Access-Control-Allow-Methods': 'GET, POST'});
     let options = new RequestOptions({ headers: headers });
     let handler = (<any>window).StripeCheckout.configure({
-      key: 'pk_test_0YBU57eM9Qz1iBcskOWEm28s',
+      key: 'pk_live_eavt23KHip9GEhPoIUs4LqOk',
       image: '../assets/images/icon.png',
       locale: 'auto',
       token: token => {
@@ -203,6 +217,151 @@ export class UserProvider {
       amount: numOfPicks * 2500,
       allowRememberMe: false
     });
+  }
+
+
+  lockGame(gameId, gameWeek, gameLocked) {
+    // Lock the game in the schedule
+    firebase.database().ref(`/pickm/schedule/gameWeek${gameWeek}`).once('value', snapshot => {
+      snapshot.forEach((game) => {
+        if (gameId == game.val().gameId) {
+          game.ref.child('locked').set(!gameLocked);
+        }
+        return false;
+      });
+    });
+
+    // Locking the game for each user
+    this.usersRef.once('value', usersSnap => {
+      usersSnap.forEach(user => {
+        user.child('picks').forEach(pick => {
+          let pickId = pick.val().gameWeeks[`gameWeek${gameWeek}`].gameId;
+          if (pickId) {
+            if (pickId == gameId) {
+              pick.ref.child('gameWeeks').child(`gameWeek${gameWeek}`).child('locked').set(!gameLocked);
+            }
+          }
+          return false;
+        });
+        return false;
+      });
+    });
+  }
+
+  setGameResults(game, results) {
+    // let loader = this.loadingCtrl.create({
+    //   content: 'Updating game results...'
+    // });
+    
+    // Get the teams & schedule as objects
+    let teams = this.teamsData.value;
+    let schedule = this.scheduleData.value[`gameWeek${game.gameWeek}`];
+    for (var gameData in schedule) {
+      if (schedule[gameData]['gameId'] == game['gameId']) {
+        // If Tie
+        if (results == 'TIE') {
+          this.scheduleRef.child(`gameWeek${game.gameWeek}`).child(gameData).child('winner').set(results);
+          let currentTiesHome = teams[game.homeTeam].ties;
+          let currentTiesAway = teams[game.awayTeam].ties;
+          currentTiesAway += 1; currentTiesHome++;
+          this.teamsRef.child(game.homeTeam).child('ties').set(currentTiesHome);
+          this.teamsRef.child(game.awayTeam).child('ties').set(currentTiesAway);
+        }
+        else { // A team won
+          // Set winner in schedule
+          this.scheduleRef.child(`gameWeek${game.gameWeek}`).child(gameData).child('winner').set(results);
+          // Adjust team records
+          let winner = "", loser = "";
+          if (game.homeTeam == results) {
+            winner = game.homeTeam;
+            loser = game.awayTeam;
+          }
+          else {
+            loser = game.homeTeam;
+            winner = game.awayTeam;
+          }
+          // Update winner's record
+          let wins = teams[winner].wins;
+          wins++;
+          this.teamsRef.child(winner).child('wins').set(wins);
+          // Update loser's record
+          let losses = teams[loser].losses;
+          losses++;
+          this.teamsRef.child(loser).child('losses').set(losses);
+        }
+        game.winner = results;
+        this.evalGame(game);
+      }    
+    }
+  }
+
+  evalGame(game) {
+    // Iterate through user's picks for the gameWeek. If gameId matches, check if they lost
+    this.usersRef.once('value', usersSnap => {
+      usersSnap.forEach(userSnap => {
+        userSnap.child('picks').forEach(pick => {
+          let userPick = pick.val().gameWeeks[`gameWeek${game.gameWeek}`];
+          if (userPick.gameId == game.gameId) {
+            // Picked the game
+            if (userPick.team != game.winner) {
+              // If game is a tie or they
+              pick.ref.child('gameWeeks').child(`gameWeek${game.gameWeek}`).child('alive').set(false);
+            }
+          }
+          return false;
+        });
+        return false;
+      });
+    });
+  }
+
+  endWeek(week) {
+    // Only run if all games are locked and in currentWeek
+    // if user didn't make a pick, alive = false
+    
+    let allLocked = true;
+    let schedule = this.scheduleData.value[`gameWeek${week}`];
+
+    for (var gameId in schedule) {
+      if (!schedule[gameId].locked || schedule[gameId].winner == "") allLocked = false;
+    }
+
+    if (!allLocked) {
+      this.sendAlert('Week not finished', 'Lock all games.');
+    }
+    else {
+      // Iterate through users. If user/alive, check if lost or no pick
+      this.usersRef.once('value', usersSnap => {
+        usersSnap.forEach(userSnap => {
+          userSnap.child('picks').forEach(pick => {
+            if (pick.val().alive) {
+              let userPick = pick.val().gameWeeks[`gameWeek${week}`];
+              console.log(`${userSnap.val().userName} is alive`);
+              console.log(userPick);
+              let message;
+              // If no pick made
+              if (!userPick.team) {
+                message = `You did not make a pick on week ${week}`;
+                pick.ref.child('alive').set(false);
+                pick.ref.child('message').set(message);
+                pick.ref.child('gameWeeks').child(`gameWeek${week}`).child('alive').set(false);
+              }
+              if (!userPick.alive) {
+                console.log('found a dead user');
+                message = `Your team lost on week ${week}`;
+                pick.ref.child('alive').set(false);
+                pick.ref.child('message').set(message);
+              }
+            }
+            return false;
+          });
+          return false;
+        });
+      });
+      firebase.database().ref('/pickm/currentWeek').set(week + 1);
+      this.sendAlert('AllDone', 'On to the next week');
+    }
+
   }
 
   private gameWeeks = {

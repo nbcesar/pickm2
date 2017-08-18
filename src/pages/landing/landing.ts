@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Platform, Content } from 'ionic-angular';
+import { NavController, Platform, Content, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { UserProvider } from '../../providers/user/user';
@@ -22,8 +22,10 @@ export class LandingPage {
     public navCtrl: NavController,
     public plt: Platform,
     public formBuilder: FormBuilder,
-    public userService: UserProvider
+    public userService: UserProvider, 
+    public loadingCtrl: LoadingController
   ) {
+   
     this.mobile = this.plt.is('mobile') || this.plt.is('mobileweb') || this.plt.width() < 500;
     
     this.signupForm = formBuilder.group({
@@ -37,6 +39,8 @@ export class LandingPage {
       password: ['', Validators.required],
     });
   }
+
+  
 
   scrollDown() {
     this.content.scrollToBottom();

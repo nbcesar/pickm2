@@ -1,6 +1,7 @@
 {
   "projects": {
     "default": "pickem-football",
-    "mrcesar": "mrcesarapp"
+    "mrcesar": "mrcesarapp",
+    "suicidePool": "suicidepool-61d2a"
   }
 }

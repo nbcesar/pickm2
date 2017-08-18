@@ -1,0 +1,83 @@
+ <ion-header>
+  <ion-navbar color="dark">
+    <ion-title>Results</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-row justify-content-center>
+    <ion-col col-3 col-md-2 justify-content-center>
+        <button ion-button icon-only color="dark" *ngIf="viewWeek > 1" (click)="changeView('back')">
+          <ion-icon  ios="md-arrow-back" md="md-arrow-back"></ion-icon>      
+        </button>
+    </ion-col>
+    <ion-col col-6 col-md-2 class="weekNumber" align-self-center>
+      <h1>Week {{ viewWeek }}</h1>
+    </ion-col>
+    <ion-col col-3 col-md-2>
+        <button ion-button icon-only color="dark" *ngIf="viewWeek < 17" (click)="changeView('forward')">
+          <ion-icon  ios="md-arrow-forward" md="md-arrow-forward"></ion-icon>      
+        </button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row justify-content-center>
+    <ion-col col-12 col-md-3 *ngFor="let game of schedule[viewWeek - 1]">
+      <ion-card>
+        <ion-card-header text-wrap>
+          {{ game?.gameDateTime | date:'EEEE, MMM d  @ h:mm a'}}
+        </ion-card-header>
+        <ion-card-content>
+          <ion-row justify-content-center class="game-details">
+            <ion-col col-5 class="team-details">
+              <img src="./assets/images/{{game?.awayTeam}}.jpg">
+              <div *ngIf="teams">
+                <h2 >{{ teams[game.awayTeam].city }}</h2>
+                <h3>{{ teams[game.awayTeam].mascot }}</h3>
+                <h6>{{ teams[game.awayTeam].wins }} - {{ teams[game.awayTeam].losses }}
+                  <span *ngIf="teams[game.awayTeam].ties > 0"> - {{ teams[game.awayTeam].ties }}</span>
+                </h6>
+                <!-- <button *ngIf="!game.locked" full ion-button color="danger" (click)="toggleLock(game)">Lock Game</button>
+                <button *ngIf="game.locked" full ion-button color="primary">Locked</button> -->
+              </div>
+            </ion-col>
+            <ion-col col-1 class="at">
+              <h1>@</h1>
+            </ion-col>
+            <ion-col col-5 class="team-details">
+                <img src="./assets/images/{{game?.homeTeam}}.jpg">
+              <div *ngIf="teams">
+                <h2 >{{ teams[game.homeTeam].city }}</h2>
+                <h3>{{ teams[game.homeTeam].mascot }}</h3>
+                <h6>{{ teams[game.homeTeam].wins }} - {{ teams[game.homeTeam].losses }}
+                  <span *ngIf="teams[game.homeTeam].ties > 0"> - {{ teams[game.homeTeam].ties }}</span>
+                </h6>
+                <!-- <button *ngIf="game.winner" full ion-button color="primary">{{ game.winner }}</button>
+                <button *ngIf="!game.winner" full ion-button color="danger" (click)="setWinner(game)">Result</button> -->
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row justify-content-center>
+            <ion-col col-5>
+              <button *ngIf="!game.locked" full ion-button color="danger" (click)="toggleLock(game)">Lock Game</button>
+              <button *ngIf="game.locked" full ion-button color="primary">Locked</button>
+            </ion-col>
+            <ion-col col-1></ion-col>
+            <ion-col col-5>
+              <button *ngIf="game.winner" full ion-button color="primary">{{ game.winner }}</button>
+              <button *ngIf="!game.winner" full ion-button color="danger" (click)="setWinner(game)">Result</button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <button *ngIf="viewWeek == currentWeek" full ion-button color="danger" (click)="endWeek()"> End Week </button>
+    </ion-col>
+  </ion-row>
+</ion-content>

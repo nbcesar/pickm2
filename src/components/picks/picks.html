@@ -24,7 +24,7 @@
   </ion-row>
 </div>
 
-<div (swipe)="tapEvent($event)" *ngIf="currentUserPicks?.length > 0">
+<div (swipe)="tapEvent($event)" *ngIf="currentUserPicks?.length > 0 && currentWeek && gameWeek">
 
   <ion-toolbar color="light" >
     <ion-title>Week {{ viewWeek }}</ion-title>  
@@ -61,7 +61,7 @@
           <ion-row class="game-details">
             <ion-col col-5 class="team-details" (click)="pickTeam(game.awayTeam,game)">
               <img [class.locked]="currentUserPicks[pickNumber].teams[game.awayTeam]" src="./assets/images/{{game?.awayTeam}}.jpg">
-              <div *ngIf="teams">
+              <div *ngIf="teams[game.awayTeam]">
                 <h2 >{{ teams[game.awayTeam].city }}</h2>
                 <h3>{{ teams[game.awayTeam].mascot }}</h3>
                 <h6>{{ teams[game.awayTeam].wins }} - {{ teams[game.awayTeam].losses }}
@@ -74,7 +74,7 @@
             </ion-col>
             <ion-col col-5 class="team-details" (click)="pickTeam(game.homeTeam,game)">
                 <img [class.locked]="currentUserPicks[pickNumber].teams[game.homeTeam]" src="./assets/images/{{game?.homeTeam}}.jpg">
-              <div *ngIf="teams">
+              <div *ngIf="teams[game.homeTeam]">
                 <h2 >{{ teams[game.homeTeam].city }}</h2>
                 <h3>{{ teams[game.homeTeam].mascot }}</h3>
                 <h6>{{ teams[game.homeTeam].wins }} - {{ teams[game.homeTeam].losses }}

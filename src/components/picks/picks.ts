@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, ToastController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 
 import { UserProvider } from '../../providers/user/user';
 
@@ -9,9 +9,9 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class PicksComponent {
 
-  currentWeek: number = 1;
-  viewWeek: number = 1;
-  gameWeek: string = 'gameWeek1';
+  currentWeek: number;
+  viewWeek: number;
+  gameWeek: string;
 
   currentUserId: any;
   currentUserPicks: any[] = [];
@@ -26,14 +26,26 @@ export class PicksComponent {
   constructor(
     public userService: UserProvider,
     public alertCtrl: AlertController,
-    private toastCtrl: ToastController
   ) {
     
   }
 
   ngOnInit() {
     // Get the current NFL week
-    this.currentWeek = this.userService.currentWeek;
+    // this.userService.currentWeekRef.once('value', weekSnap => {
+    //   this.currentWeek = weekSnap.val();
+    //   this.viewWeek = this.currentWeek;
+    //   this.gameWeek = `gameWeek${this.viewWeek}`;
+    // });
+
+    this.userService.currentWeek.subscribe(
+      value => {
+        this.currentWeek = value;
+      }
+    );
+    this.viewWeek = this.currentWeek;
+    this.gameWeek = `gameWeek${this.viewWeek}`; 
+
     // Get the current user's Id
     this.userService.currentUserId.subscribe(
       value => {
@@ -90,6 +102,7 @@ export class PicksComponent {
       for (var game in scheduleObj[gameWeekString]) {
         this.weeklySchedule.push(scheduleObj[gameWeekString][game]);
       }
+      this.weeklySchedule.sort(function(a,b) {return (parseInt(a.gameId) > parseInt(b.gameId)) ? 1 : ((parseInt(b.gameId) > parseInt(a.gameId)) ? -1 : 0);} ); 
       this.schedule.push(this.weeklySchedule);
     }
   }
@@ -160,6 +173,7 @@ export class PicksComponent {
     // If new team is already locked
     if (game.locked) {
       this.showAlert("Invalid Pick", "The game is locked.");
+      return;
     }
 
     // If user has picked team before
