@@ -29,12 +29,12 @@ export class MyApp {
     // loading.present();
 
     firebase.initializeApp({
-      apiKey: "AIzaSyAiquWTntv-tFERuUPdpVhfDUrVNliHFDQ",
-      authDomain: "mrcesarapp.firebaseapp.com",
-      databaseURL: "https://mrcesarapp.firebaseio.com",
-      projectId: "mrcesarapp",
-      storageBucket: "mrcesarapp.appspot.com",
-      messagingSenderId: "1023633367637"
+      apiKey: "",
+      authDomain: "",
+      databaseURL: "",
+      projectId: "",
+      storageBucket: "",
+      messagingSenderId: ""
     });
     
     platform.ready().then(() => {
